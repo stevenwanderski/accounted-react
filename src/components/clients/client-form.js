@@ -1,6 +1,5 @@
 import React from 'react'
 import { History, Link } from 'react-router'
-import axios from '../../utils/axios'
 
 export default React.createClass({
   mixins: [History],

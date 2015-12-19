@@ -1,14 +1,16 @@
 import axios from 'axios'
-import currentUser from './current-user'
+import auth from './auth'
 
-let headers = {}
-if (currentUser) {
-  headers['Authorization'] = `Token token=${currentUser.token}`
+export default function() {
+  let headers = {}
+  if (auth.loggedIn()) {
+    headers['Authorization'] = `Token token=${auth.currentUser().token}`
+  }
+
+  const axiosInstance = axios.create({
+    baseURL: 'http://localhost:3000/api/',
+    headers: headers
+  });
+
+  return axiosInstance
 }
-
-var axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api/',
-  headers: headers
-});
-
-export default axiosInstance

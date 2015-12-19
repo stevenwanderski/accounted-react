@@ -2,8 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, Link, IndexRoute } from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
+import axios from 'axios'
 
-import currentUser from './utils/current-user'
+import auth from './utils/auth'
 import AuthenticatedLayout from './layouts/authenticated'
 
 import Login from './components/login'
@@ -13,15 +14,17 @@ import Client from './components/clients/client'
 import NewClient from './components/clients/new-client'
 import EditClient from './components/clients/edit-client'
 import Payments from './components/payments/payments'
+import NewPayment from './components/payments/new-payment'
+import EditPayment from './components/payments/edit-payment'
 
 function requireAuth(nextState, replaceState) {
-  if (!currentUser) {
+  if (!auth.loggedIn()) {
     replaceState({}, '/login')
   }
 }
 
 function redirectIfAuth(nextState, replaceState) {
-  if (currentUser) {
+  if (auth.loggedIn()) {
     replaceState({}, '/clients')
   }
 }
@@ -36,7 +39,11 @@ ReactDOM.render((
       <Route path='clients/new' component={NewClient} />
       <Route path='clients/:clientId' component={Client} />
       <Route path='clients/:clientId/edit' component={EditClient} />
-      <Route path='payments' component={Payments} />
+
+      <Route path='/payments' component={Payments}>
+        <Route path='new' component={NewPayment} />
+        <Route path=':paymentId/edit' component={EditPayment} />
+      </Route>
     </Route>
   </Router>
 ), document.getElementById('app'))

@@ -1,7 +1,6 @@
 import React from 'react'
-import axios from 'axios'
+import axios from '../utils/axios'
 import { Link, History } from 'react-router'
-import authenticateUser from '../utils/authenticate-user'
 
 export default React.createClass({
   mixins: [History],
@@ -11,7 +10,7 @@ export default React.createClass({
     const email = this.refs.email.value
     const password = this.refs.password.value
 
-    authenticateUser(email, password)
+    axios().post('register', { email, password })
     .then((response) => {
       localStorage.token = response.data.token
       this.history.pushState(null, '/clients')

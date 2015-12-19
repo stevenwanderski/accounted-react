@@ -1,0 +1,11 @@
+.layout-modal {
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  left: 100px;
+  right: 100px;
+  background: #fff;
+  border: solid #ccc 5px;
+  padding: 10px 40px;
+  overflow: scroll;
+}

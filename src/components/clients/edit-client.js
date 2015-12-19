@@ -14,7 +14,7 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    axios.get(`clients/${this.props.params.clientId}`)
+    axios().get(`clients/${this.props.params.clientId}`)
       .then((response) => {
         this.setState({ client: response.data, loading: false })
       })
@@ -24,7 +24,7 @@ export default React.createClass({
   },
 
   onSave(formData) {
-    axios.put(`clients/${this.state.client.id}`, { client: formData })
+    axios().put(`clients/${this.state.client.id}`, { client: formData })
       .then((response) => {
         this.history.pushState(null, `/clients/${this.state.client.id}`)
       })

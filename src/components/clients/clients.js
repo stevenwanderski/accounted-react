@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router'
-import axios from 'axios';
 import ClientList from './client-list'
 
 export default React.createClass({

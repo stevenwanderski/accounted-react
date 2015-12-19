@@ -11,7 +11,7 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    this.getClients()
+    axios().get('clients')
       .then((response) => {
         this.setState({
           loading: false,
@@ -21,15 +21,6 @@ export default React.createClass({
       .catch((response) => {
         console.error(response)
       })
-  },
-
-  getClients() {
-    return axios.get('http://localhost:3000/api/clients')
-  },
-
-  onDeleteClient(client) {
-    const newClients = this.state.clients.filter((_client) => _client.id != client.id )
-    this.setState({ clients: newClients })
   },
 
   render() {

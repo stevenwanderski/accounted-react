@@ -13,7 +13,7 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    axios.get(`clients/${this.props.params.clientId}`)
+    axios().get(`clients/${this.props.params.clientId}`)
       .then((response) => {
         this.setState({ client: response.data, loading: false })
       })
@@ -27,7 +27,7 @@ export default React.createClass({
 
     if (!confirm('Sure?')) return
 
-    this.deleteClient()
+    axios().delete(`clients/${this.state.client.id}`)
       .then((response) => {
         this.history.pushState({}, '/clients')
       })
@@ -35,10 +35,6 @@ export default React.createClass({
         alert('ERROR. FAIL.')
         console.error(response)
       })
-  },
-
-  deleteClient() {
-    return axios.delete(`http://localhost:3000/api/clients/${this.state.client.id}`)
   },
 
   render() {

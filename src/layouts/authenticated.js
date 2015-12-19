@@ -1,6 +1,6 @@
 import React from 'react'
 import { History, Link, IndexLink } from 'react-router'
-import currentUser from '../utils/current-user'
+import auth from '../utils/auth'
 
 export default React.createClass({
   mixins: [History],
@@ -16,9 +16,8 @@ export default React.createClass({
       <div>
         <header>
           <h1>The App</h1>
-          <Link to='/clients'>Clients</Link>
-          <Link to='/payments'>Payments</Link>
-          <p>Hello {currentUser.email} - <a href='' onClick={this.onLogoutClick}>Logout</a></p>
+          <Link to='/payments'>Payments</Link> <Link to='/clients'>Clients</Link>
+          <p>Hello {auth.currentUser().email} - <a href='' onClick={this.onLogoutClick}>Logout</a></p>
         </header>
 
         <hr />
