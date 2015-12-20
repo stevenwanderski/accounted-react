@@ -4,7 +4,7 @@ module.exports = {
     filename: "public/bundle.js"
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.css']
   },
   module: {
     loaders: [
@@ -15,7 +15,8 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
-      }
+      },
+      { test: /\.css$/, loader: "style-loader!css-loader" }
     ]
   },
   devtool: 'source-map'

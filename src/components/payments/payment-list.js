@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 import axios from '../../utils/axios'
+import { currency } from '../../utils/number'
+import { month_day_year } from '../../utils/date'
 
 export default React.createClass({
   onDeleteClick(payment, e) {
@@ -15,7 +17,8 @@ export default React.createClass({
 
       return (
         <tr key={payment.id}>
-          <td>{payment.amount_in_cents}</td>
+          <td>{month_day_year(payment.date)}</td>
+          <td>{currency(payment.amount)}</td>
           <td>{payment.payment_type}</td>
           <td>{clientName}</td>
           <td>
@@ -30,6 +33,7 @@ export default React.createClass({
       <table className='table'>
         <thead>
           <tr>
+            <th>Date</th>
             <th>Amount</th>
             <th>Type</th>
             <th>Client</th>

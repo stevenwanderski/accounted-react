@@ -35,10 +35,10 @@ ReactDOM.render((
     <Route path='/signup' component={Signup} onEnter={redirectIfAuth} />
 
     <Route path='/' component={AuthenticatedLayout} onEnter={requireAuth}>
-      <Route path='clients' component={Clients} />
-      <Route path='clients/new' component={NewClient} />
-      <Route path='clients/:clientId' component={Client} />
-      <Route path='clients/:clientId/edit' component={EditClient} />
+      <Route path='/clients' component={Clients}>
+        <Route path='new' component={NewClient} />
+        <Route path=':clientId/edit' component={EditClient} />
+      </Route>
 
       <Route path='/payments' component={Payments}>
         <Route path='new' component={NewPayment} />

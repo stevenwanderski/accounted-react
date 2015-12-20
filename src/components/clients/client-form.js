@@ -12,9 +12,13 @@ export default React.createClass({
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <input type='text' ref='name' defaultValue={this.props.client.name} />
+        <div className='form-group'>
+          <label>Name</label>
+          <input type='text' ref='name' defaultValue={this.props.client.name} className='form-control' />
+        </div>
+
         <button>Save</button>
-        <Link to={this.props.cancelRoute}>Cancel</Link>
+        <Link to={this.props.cancelRoute} className='btn'>Cancel</Link>
       </form>
     )
   }

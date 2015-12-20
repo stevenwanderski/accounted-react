@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, History } from 'react-router'
+import moment from 'moment'
 import axios from '../../utils/axios'
 import PaymentForm from './payment-form'
 
@@ -27,6 +28,8 @@ export default React.createClass({
   componentDidMount() {
     axios().get(`payments/${this.props.params.paymentId}`)
       .then((response) => {
+        let payment = response.data
+        payment.date = moment(payment.date)
         this.setState({ payment: response.data, loading: false })
       })
   },

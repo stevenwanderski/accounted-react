@@ -1,6 +1,10 @@
 import React from 'react'
 import { History, Link } from 'react-router'
 import axios from '../../utils/axios'
+import CurrencyMaskedInput from 'react-currency-masked-input'
+import DatePicker from 'react-datepicker'
+
+require('react-datepicker/dist/react-datepicker.css');
 
 export default React.createClass({
   mixins: [History],
@@ -28,7 +32,8 @@ export default React.createClass({
   onSubmit(e) {
     e.preventDefault()
     this.props.onSave({
-      amount_in_cents: this.refs.amount_in_cents.value,
+      date: this.refs.date.getValue().format(),
+      amount: this.refs.amount.value,
       payment_type: this.refs.payment_type.value,
       client_id: this.refs.client_id.value
     })
@@ -44,11 +49,16 @@ export default React.createClass({
     })
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} noValidate='true'>
+
+        <div className='form-group'>
+          <label>Date</label>
+          <DatePicker dateFormat='MM/DD/YYYY' ref='date' selected={this.props.payment.date} />
+        </div>
 
         <div className='form-group'>
           <label>Amount</label>
-          <input type='text' ref='amount_in_cents' defaultValue={this.props.payment.amount_in_cents} placeholder='Amount' className='form-control' />
+          <CurrencyMaskedInput type='text' ref='amount' value={this.props.payment.amount} placeholder='Amount' className='form-control' />
         </div>
 
         <div className='form-group'>

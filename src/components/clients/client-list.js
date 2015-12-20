@@ -3,35 +3,21 @@ import { Link } from 'react-router'
 import axios from '../../utils/axios'
 
 export default React.createClass({
-  getInitialState() {
-    return {
-      loading: true,
-      clients: []
-    };
-  },
-
-  componentDidMount() {
-    axios().get('clients')
-      .then((response) => {
-        this.setState({
-          loading: false,
-          clients: response.data
-        })
-      })
-      .catch((response) => {
-        console.error(response)
-      })
+  onDeleteClick(client, e) {
+    e.preventDefault();
+    if (!confirm('Sure?')) return
+    this.props.deleteClient(client)
   },
 
   render() {
-    if (this.state.loading) {
-      return <div>Loading...</div>
-    }
-
-    const clients = this.state.clients.map((client) => {
+    const clients = this.props.clients.map((client) => {
       return (
         <tr key={client.id}>
-          <td><Link to={`/clients/${client.id}`}>{client.name}</Link></td>
+          <td>{client.name}</td>
+          <td>
+            <Link to={`/clients/${client.id}/edit`} className='btn btn-lg'><span className='glyphicon glyphicon-edit'></span></Link>
+            <a href='' onClick={this.onDeleteClick.bind(null, client)} className='btn btn-lg text-danger'><span className='glyphicon glyphicon-trash'></span></a>
+          </td>
         </tr>
       )
     })
@@ -41,6 +27,7 @@ export default React.createClass({
         <thead>
           <tr>
             <th>Name</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

@@ -21,7 +21,7 @@ export default React.createClass({
     const client = { name: '' }
 
     return (
-      <div>
+      <div className='layout-modal'>
         <h2>New Client</h2>
         <ClientForm client={client} cancelRoute='/clients' onSave={this.onSave} />
       </div>

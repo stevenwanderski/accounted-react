@@ -26,7 +26,7 @@ export default React.createClass({
   onSave(formData) {
     axios().put(`clients/${this.state.client.id}`, { client: formData })
       .then((response) => {
-        this.history.pushState(null, `/clients/${this.state.client.id}`)
+        this.history.pushState(null, '/clients')
       })
       .catch((response) => {
         console.log(response);
@@ -39,9 +39,9 @@ export default React.createClass({
     }
 
     return (
-      <div>
+      <div className='layout-modal'>
         <h2>Edit Client</h2>
-        <ClientForm client={this.state.client} onSave={this.onSave} cancelRoute={`/clients/${this.state.client.id}`} />
+        <ClientForm client={this.state.client} onSave={this.onSave} cancelRoute={`/clients`} />
       </div>
     )
   }
